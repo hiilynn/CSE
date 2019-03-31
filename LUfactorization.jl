@@ -106,12 +106,12 @@ function backward_sub(U,c)
     n = length(c)
     x = zeros(n)
     x[n] = c[n]/U[n,n]
-    for i = 1:n-1
+    for i = n-1:1
         s = 0
-        for j = i+1:n
+        for j = n:i+1
             s += U[i,j] * x[j] 
         end
-        x[n-i] = (c[n-i] - s)/U[n-i,n-i]
+        x[i] = (c[i] - s)/U[i,i]
     end
     return x
 end
