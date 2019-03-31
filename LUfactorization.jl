@@ -85,8 +85,8 @@ end
 # Problem 2(c)
 # ===========================
 
-L = LU(M)[1]
-U = LU(M)[2]
+# L = LU(M)[1]
+# U = LU(M)[2]
 
 function forward_sub(L,b)
     n = length(b)
@@ -106,12 +106,33 @@ function backward_sub(U,c)
     n = length(c)
     x = zeros(n)
     x[n] = c[n]/U[n,n]
-    for i = n-1:1
+    for i = n-1:-1:1
         s = 0
-        for j = n:i+1
+        for j = n:-1:i+1
             s += U[i,j] * x[j] 
         end
         x[i] = (c[i] - s)/U[i,i]
     end
     return x
 end
+
+# ===========================
+# Problem 3(a)
+# ===========================
+
+# L = LU(Kn(15))[1]
+# U = LU(Kn(15))[2]
+# x = (1/16)*[1:15...]
+
+function LU_Calc(M,x)
+    h = 1/(size(M)[1]+1)
+    L = LU(M)[1]
+    U = LU(M)[2]
+    
+    f = forward_sub(L,x)
+    b = backward_sub(U,f)
+    return b*h^2
+end
+
+sol_3a = LU_Calc(Kn(15),(1/16)*[1:15...])
+
