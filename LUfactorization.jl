@@ -3,17 +3,15 @@
 # ===========================
 
 function LU(M)
-# =========================== 
-# Initialization
-# ===========================
     n = size(M)[1]
     L = zeros(n,n)
     U = zeros(n,n) 
+   
     for i = 1:n
         L[i,i] = 1
         U[1,i] = M[1,i]
     end
-# ===========================
+
     for i = 1:n
         for k = i:n
             s = 0
@@ -85,9 +83,6 @@ end
 # Problem 2(c)
 # ===========================
 
-# L = LU(M)[1]
-# U = LU(M)[2]
-
 function forward_sub(L,b)
     n = length(b)
     c = zeros(n)
@@ -120,10 +115,6 @@ end
 # Problem 3(a)
 # ===========================
 
-# L = LU(Kn(15))[1]
-# U = LU(Kn(15))[2]
-# x = (1/16)*[1:15...]
-
 function LU_Calc(M,x)
     h = 1/(size(M)[1]+1)
     L = LU(M)[1]
@@ -134,5 +125,111 @@ function LU_Calc(M,x)
     return b*h^2
 end
 
-sol_3a = LU_Calc(Kn(15),(1/16)*[1:15...])
+x1 = (1/16)*[1:15...]
+Sol_3a = LU_Calc(Kn(15),x1)
+
+# ===========================
+# Problem 3(b)
+# ===========================
+
+function ExactSol(x)
+    return -1/6 .* x .^ 3 + 1/6 .* x
+end
+
+Error_3b = ExactSol(x1) - Sol_3alogin?product=2&return_to=https%3A%2F%2Fwww.meistertask.com%2Fko%2Fapp%2Fdashboard
+
+# Plotting
+
+# using Winston
+
+#plot(x,ExactSol(x)) 
+#plot!(x,Sol_3a)
+
+# ===========================
+# Problem 3(c)
+# ===========================
+
+# for n = 100
+x2 = (1/101)*[1:100...]
+Sol_3c1 = LU_Calc(Kn(100),x2)
+Error_3c1 = ExactSol(x2) - Sol_3c1
+# for n = 200
+x3 = (1/201)*[1:200...]
+Sol_3c2 = LU_Calc(Kn(200),x3)
+Error_3c2 = ExactSol(x3) - Sol_3c2
+
+# Plotting
+
+#plot(x2, Sol_3c1, "bo", x2, ExactSol(x2), "r-")
+#scatter(x3, Sol_3c2, label="approx2", size=(1200,800), dpi=300)
+#plot!(x3, ExactSol(x3), label="exact2")
+#savefig("Plot3c.png")
+
+# ===========================
+# Problem 4(a)
+# ===========================
+
+Sol_4a = LU_Calc(Tn(15),x1)
+
+# ===========================
+# Problem 4(b)
+# ===========================
+
+function ExactSol2(x) 
+    return -1/6 .* x .^3
+end
+
+Error_4b = ExactSol2(x1) - Sol_4a
+
+# Plotting
+
+# ===========================
+# Problem 4(c)
+# ===========================
+
+# for n = 100
+x2 = (1/101)*[1:100...]
+Sol_4c1 = LU_Calc(Tn(100),x2)
+Error_4c1 = ExactSol2(x2) - Sol_4c1
+# for n = 200
+x3 = (1/201)*[1:200...]
+Sol_4c2 = LU_Calc(Tn(200),x3)
+Error_4c2 = ExactSol2(x3) - Sol_4c2
+
+# Plotting
+
+# ===========================
+# Problem 5(a)
+# ===========================
+
+function domain(x)
+    return cos.(4*pi .* x)
+end
+
+function ExactSol3(M)
+    return (1/4*pi)^2 .* (M .- 1)
+end
+
+# ===========================
+# Problem 5(b)
+# ===========================
+
+# n=4
+Sol_5b1 = LU_Calc(Kn(4), domain(1/5 .* [1:4...]))
+
+# n=8
+Sol_5b2 = LU_Calc(Kn(8), domain(1/9 .* [1:8...]))
+
+# ===========================
+# Problem 5(c)
+# ===========================
+
+
+# ===========================
+# Problem 6(a)
+# ===========================
+
+function ExactSol4(x) 
+    return x .+ (1/(1-exp(1))) .* (exp.(x) .- 1)
+end
 
