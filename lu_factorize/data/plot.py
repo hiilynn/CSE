@@ -38,21 +38,34 @@ plt.rc('font', family='serif')
 #plt.savefig("prob_3c.png", dpi=300)
 
 # 4-c
-with open("prob_4c_1.pickle", "rb") as fr:
-    data_4c_1 = pickle.load(fr)
+#with open("prob_4c_1.pickle", "rb") as fr:
+#    data_4c_1 = pickle.load(fr)
+#
+#with open("prob_4c_2.pickle", "rb") as fr:
+#    data_4c_2 = pickle.load(fr)
+#
+#plt.figure(figsize=(10,6), dpi=300)
+#plt.plot(data_4c_1[0], data_4c_1[1], 'r.', label=r'Approx $(n=100)$', alpha=0.2)
+#plt.plot(data_4c_1[0], data_4c_1[2], 'r-', label=r'Exact $(n=100)$', alpha=0.2)
+#plt.plot(data_4c_2[0], data_4c_2[1], 'b.', label=r'Approx $(n=200)$', alpha=0.2)
+#plt.plot(data_4c_2[0], data_4c_2[2], 'b-', label=r'Exact $(n=200)$', alpha=0.2)
+#plt.title(r'Problem 4-c)', fontsize=16)
+#plt.xlabel(r'$x$', fontsize=14)
+#plt.ylabel(r'$y$', fontsize=14)
+#plt.grid()
+#plt.legend(fontsize=12)
+#plt.savefig("prob_4c.png", dpi=300)
 
-with open("prob_4c_2.pickle", "rb") as fr:
-    data_4c_2 = pickle.load(fr)
+# 5-c
 
+with open("prob_5c.pickle", "rb") as fr:
+    data_5c = pickle.load(fr)
 plt.figure(figsize=(10,6), dpi=300)
-plt.plot(data_4c_1[0], data_4c_1[1], 'r.', label=r'Approx $(n=100)$', alpha=0.2)
-plt.plot(data_4c_1[0], data_4c_1[2], 'r-', label=r'Exact $(n=100)$', alpha=0.2)
-plt.plot(data_4c_2[0], data_4c_2[1], 'b.', label=r'Approx $(n=200)$', alpha=0.2)
-plt.plot(data_4c_2[0], data_4c_2[2], 'b-', label=r'Exact $(n=200)$', alpha=0.2)
-plt.title(r'Problem 4-c)', fontsize=16)
+plt.plot(data_5c[0], data_5c[1], 'ro', label=r'Approx')
+plt.plot(data_5c[0], data_5c[2], 'b-', label=r'Exact')
+plt.title(r'Problem 5-c)', fontsize=16)
 plt.xlabel(r'$x$', fontsize=14)
 plt.ylabel(r'$y$', fontsize=14)
 plt.grid()
 plt.legend(fontsize=12)
-plt.savefig("prob_4c.png", dpi=300)
-
+plt.savefig("prob_5c.png", dpi=300)

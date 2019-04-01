@@ -1,5 +1,6 @@
 extern crate peroxide;
 use peroxide::*;
+use std::f64::consts::PI;
 
 fn main() {
 
@@ -100,6 +101,26 @@ fn main() {
         let result2: Matrix = cbind!(x2_plot.to_matrix(), result_temp2, exact2.to_matrix());
         result1.write_pickle("data/prob_4c_1.pickle").expect("Can't write prob4c1");
         result2.write_pickle("data/prob_4c_2.pickle").expect("Can't write prob4c2");
+    }
+    // Problem 5-c)
+    {
+        let x = seq(1, 15, 1).fmap(|t| t/16f64);
+        let x_plot = seq(0,16,1).fmap(|t| t/16f64);
+        let (a, b, c) = coeff_gen(15);
+        let m = tdma(a,b,c,x.fmap(|t| (t * 4f64 * PI).cos()));
+        let result_temp = matrix(
+            {
+                let mut temp = cat(0f64, m.data.clone());
+                temp.push(0f64);
+                temp
+            },
+            m.row + 2,
+            m.col,
+            m.shape,
+        );
+        let exact = x_plot.clone().fmap(|t| (0.25*PI).powi(2) * (t - 1f64));
+        let result: Matrix = cbind!(x_plot.to_matrix(), result_temp, exact.to_matrix());
+        result.write_pickle("data/prob_5c.pickle").expect("Can't write prob5c");
     }
 }
 
