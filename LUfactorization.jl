@@ -233,3 +233,61 @@ function ExactSol4(x)
     return x .+ (1/(1-exp(1))) .* (exp.(x) .- 1)
 end
 
+# ===========================
+# Problem 6(b)
+# ===========================
+
+function centered_diff(n)
+    M = zeros(n,n)
+    for i = 1:n
+        M[i,i] = 0
+        if i+1 <= n
+            M[i, i+1] = 1
+        end
+        if i-1 > 0
+            M[i, i-1] = -1
+        end
+    end
+    return M
+end
+
+# if h = 1/5 => n = 4
+
+A = 5^2 .* Kn(4) + 10 .* centered_diff(4)
+
+LU(A)
+La = LU(A)[1]
+Ua = LU(A)[2]
+
+x4 = [1,1,1,1]
+Sol_A = LU_Calc(A, x4)
+
+# ===========================
+# Problem 6(c)
+# ===========================
+
+function forward_diff(n)
+    M = zeros(n,n)
+    for i = 1:n
+        M[i,i] = -1
+        if i < n
+            M[i,i+1] = 1
+        end
+    end
+    return M
+end
+
+B = 5^2 .* Kn(4) + 5 .* forward_diff(4)
+
+Sol_B = LU_Calc(B, x4)
+    
+# ===========================
+# Problem 6(d)
+# ===========================
+Sol_6a = ExactSol4(x4)
+Error_6d1 = Sol_6a - Sol_A
+Error_6d2 = Sol_6a - Sol_B
+
+
+# Plotting : Sol_6a & Sol_A & Sol_B 
+
